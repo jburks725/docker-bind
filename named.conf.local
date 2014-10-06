@@ -1,0 +1,4 @@
+include "/etc/bind/zones.rfc1918";
+
+zone "168.192.in-addr.arpa."  { type master; file "/etc/bind/db.168.192.in-addr.arpa"; };
+zone "jasonburks.local."      { type master; file "/etc/bind/db.jasonburks.local"; };

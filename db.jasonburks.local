@@ -1,0 +1,18 @@
+;
+; BIND data file for jasonburks.local.
+;
+$TTL  604800
+@ IN  SOA dns.jasonburks.local. jason.jasonburks.com. (
+            3   ; Serial
+       604800   ; Refresh
+        86400   ; Retry
+      2419200   ; Expire
+       604800 ) ; Negative Cache TTL
+;
+$TTL  86400
+@       IN  NS    dns.jasonburks.local.
+dns     IN  A     192.168.1.5
+esx     IN  A     192.168.1.4
+ilo     IN  A     192.168.1.6
+router  IN  A     192.168.1.1
+docker  IN  CNAME dns.jasonburks.local.

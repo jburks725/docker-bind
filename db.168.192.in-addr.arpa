@@ -1,0 +1,17 @@
+;
+; BIND reverse zone for 168.192.in-addr.arpa.
+;
+$TTL 604800
+@ IN  SOA dns.jasonburks.local. jason.jasonburks.com. (
+            2   ; Serial
+       604800   ; Refresh
+        86400   ; Retry
+      2419200   ; Expire
+       604800 ) ; Negative Cache TTL
+;
+$TTL  86400
+@     IN    NS    dns.jasonburks.local.
+1.1   IN    PTR   router.jasonburks.local.
+1.4   IN    PTR   esx.jasonburks.local.
+1.5   IN    PTR   docker.jasonburks.local.
+1.6   IN    PTR   ilo.jasonburks.local.
