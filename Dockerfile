@@ -1,21 +1,26 @@
-FROM ubuntu:latest
+FROM debian:latest
 MAINTAINER jburks725@gmail.com
 
-VOLUME /var/cache/bind
+# Quiet apt down a bit
+ENV DEBIAN_FRONTEND noninteractive
+
+VOLUME /rndc
+VOLUME /zones
 
 # make sure the package repo is up-to-date
 RUN apt-get update && \
-	apt-get dist-upgrade -y && \
 	apt-get install -y bind9
 
 # copy our BIND config files and chgrp them
 COPY  named.conf.options  /etc/bind/named.conf.options
-COPY  named.conf.local     /etc/bind/named.conf.local
-COPY  db.jasonburks.local /etc/bind/db.jasonburks.local
-COPY  db.168.192.in-addr.arpa /etc/bind/db.168.192.in-addr.arpa
+COPY  zones/              /zones/
 COPY  zones.rfc1918       /etc/bind/zones.rfc1918
-RUN cd /etc/bind && chgrp bind named.conf.*
+COPY  start-bind.sh       /start-bind.sh
+RUN chgrp bind /etc/bind/named.conf.*
 
-EXPOSE 53 53/udp
+EXPOSE 53 53/udp 953
 
-CMD ["/usr/sbin/named", "-g", "-4", "-ubind"]
+CMD ["/start-bind.sh"]
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
