@@ -16,7 +16,7 @@ COPY  named.conf.options  /etc/bind/named.conf.options
 COPY  zones/              /zones/
 COPY  zones.rfc1918       /etc/bind/zones.rfc1918
 COPY  start-bind.sh       /start-bind.sh
-RUN chgrp bind /etc/bind/named.conf.*
+RUN chgrp bind /etc/bind/named.conf.* && chmod o+r /zones/*
 
 EXPOSE 53 53/udp 953
 
