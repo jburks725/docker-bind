@@ -7,11 +7,11 @@ of internal zones authoritatively, if desired.
 This container supports a number of options at run-time. At a minimum, you should publish ports 53 and 53/udp.
 
 ```bash
-docker run -d --name=dns -p 53:53 -p 53:53/udp -v --restart=on-failure jburks725/bind:latest
+docker run -d --name=dns -p 53:53 -p 53:53/udp --restart=on-failure jburks725/bind:latest
 ```
 
 ### Additional run-time options
-* Port 953 - you can publish port 953/tcp to allow RNDC connections (make sure you mount a volume for it)
+* Port 953 - you can publish port `953/tcp` to allow RNDC connections (make sure you mount a volume for it)
 * RNDC volume - mount a directory to `/rndc` in the container to get a copy of the RNDC key on startup
 * Zones volume - mount a directory to `/zones` to serve zones
 
