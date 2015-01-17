@@ -47,7 +47,8 @@ exposing ports 53 and 53/udp, as below.
 
 ```bash
 # If you built your own image, be sure to substitute your image tag below
-docker run -d --name=dns -p 53:53 -p 53:53/udp --restart=on-failure \ jburks725/bind:latest
+docker run -d --name=dns -p 53:53 -p 53:53/udp --restart=on-failure \
+jburks725/bind:latest
 ```
 
 ## Running The Container - Volumes and RNDC Updates
