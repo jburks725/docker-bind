@@ -6,9 +6,12 @@ ENV DEBIAN_FRONTEND noninteractive
 
 VOLUME /zones
 
-# make sure the package repo is up-to-date
+# make sure the package repo is up-to-date, insatll bind,
+# and clean up apt when done.
 RUN apt-get update && \
-    apt-get install -y bind9
+    apt-get install -y bind9 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # copy our BIND config files and chgrp them
 COPY  named.conf.options  /etc/bind/named.conf.options
@@ -22,7 +25,3 @@ EXPOSE 53 53/udp
 
 CMD ["/start-bind.sh"]
 
-# Clean up APT when done.
-RUN apt-get clean && \
-    apt-get autoremove && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

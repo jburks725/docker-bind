@@ -20,6 +20,12 @@ serve, including the trailing dot.
 Structure of BIND zone files is beyond the scope of this README. There is a
 good reference here: http://www.zytrax.com/books/dns/ch6/mydomain.html
 
+_Note: The `zones.rfc1918` file in this image is configured to allow self-
+hosting of 192.168.in-addr.arpa. If you want to use a different RFC-1918
+reverse zone, you'll need to clone the repo and modify `zones.rfc1918` to meet
+your needs. The original file from the `bind9` package is included in the repo
+as `zones.rfc1918.orig`._ 
+
 ### Internal Zones - Completely Static
 This method allows you to set up static internal zones. To modify these zones,
 you will need to rebuild your image and re-run your container.
@@ -70,3 +76,6 @@ docker exec dns rndc reload
 
 You may check the `docker logs dns` output to verify that your new zone serial
 numbers were loaded, or you may `dig` the SOA record for the zone.
+
+If you want to add new zones to your configuration, you'll need to restart the
+container rather than doing an `rndc reload`.
