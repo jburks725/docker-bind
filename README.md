@@ -58,7 +58,7 @@ method described above, simply mount a directory on your Docker host to the
 
 ```bash
 docker run -d --name=dns -p 53:53 -p 53:53/udp -v /path/to/zonefiles:/zones:ro \
---restart-on-failure jburks725/bind:latest
+--restart=on-failure jburks725/bind:latest
 ```
 
 You may then modify the zones in this directory on your Docker host (being sure
