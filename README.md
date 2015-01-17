@@ -29,6 +29,10 @@ you will need to rebuild your image and re-run your container.
   directory, following the naming convention above
   3. Build the image normally: `docker build -t yourname/bind .`
 
+_Note: The `zones/` directory contains a `.gitignore` file that will ignore all
+contents of the directory, so if you're version controlling this after cloning,
+you may want to modify the `.gitignore`._
+
 ### Internal Zones - Volumes and RNDC Updates
 If you'd like to be able to update your internal zones without rebuilding the
 image every time, you may take advantage of Docker's VOLUME and `exec` features.
